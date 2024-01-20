@@ -2,6 +2,8 @@ import { StyleSheet, View, Pressable, Text } from "react-native";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 
 export default function Button({ label, theme, onPress }) {
+
+  // Allows the app to utilize the button component for multiple different button styles
     if( theme === "primary"){
         return (
           <View
@@ -40,6 +42,7 @@ export default function Button({ label, theme, onPress }) {
     );
 }
 
+// Button styles
 const styles = StyleSheet.create({
   buttonContainer: {
     width: 320,

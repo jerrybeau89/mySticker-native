@@ -11,6 +11,8 @@ export default function App() {
   console.log("App executed");
 
   const [selectedImage, setSelectedImage] = useState(null);
+
+  // Asynchronous function used to launch the device's image library allowing the app to present the user with the option to select an image and edit the selected image on IOS and Android platforms.
   const pickImageAsync = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       allowsEditing: true,
@@ -46,6 +48,7 @@ export default function App() {
   );
 }
 
+// Primary app styles
 const styles = StyleSheet.create({
   container: {
     flex: 1,
