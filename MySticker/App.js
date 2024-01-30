@@ -6,6 +6,9 @@ import * as ImagePicker from "expo-image-picker";
 import { useState } from "react";
 import CircleButton from "./components/CircleButton";
 import IconButton from "./components/IconButtons";
+import EmojiPicker from "./components/EmojiPicker";
+import EmojiList from "./components/EmojiList";
+import EmojiSticker from "./components/EmojiSticker";
 
 const PlaceholderImage = require("./assets/background-image.jpeg");
 
@@ -14,10 +17,21 @@ export default function App() {
 
   const [selectedImage, setSelectedImage] = useState(null);
   const [showAppOptions, setShowAppOptions] = useState(false);
+  const [ isModalVisible, setIsModalVisible ] = useState(false);
+  const [pickedEmoji, setPickedEmoji] = useState(null);
+
   const onReset = () => {
     setShowAppOptions(false)
   };
-  const onAddSticker = () => {}
+
+  const onAddSticker = () => {
+    setIsModalVisible(true);
+  };
+
+const onModalClose =() => {
+  setIsModalVisible(false);
+};
+
   const onSaveImageAsync = async () => {}
 
   // Asynchronous function used to launch the device's image library allowing the app to present the user with the option to select an image and edit the selected image on IOS and Android platforms.
@@ -43,6 +57,7 @@ export default function App() {
           placeholderImageSource={PlaceholderImage}
           selectedImage={selectedImage}
         />
+        {pickedEmoji && <EmojiSticker imageSize={40} stickerSource={pickedEmoji}/>}
       </View>
       {/* Ternary operator to toggle sticker button option visibility  */}
       {showAppOptions ? (
@@ -63,6 +78,9 @@ export default function App() {
         <Button label="Use this photo" onPress={() => setShowAppOptions(true)}/>
       </View>
       )}
+      <EmojiPicker isVisible={isModalVisible} onClose={onModalClose}>
+        <EmojiList onSelect={setPickedEmoji} onCloseModal={onModalClose}/>
+      </EmojiPicker>
       <StatusBar style="auto" />
     </View>
   );
